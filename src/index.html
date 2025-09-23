@@ -38,6 +38,34 @@
                     Add Task
                 </button>
             </div>
+            <!-- Edit task -->
+            <div
+                id="task-edit"
+                class="hidden fixed inset-0 bg-gray-500/50 flex items-center justify-center"
+            >
+                <div class="bg-white rounded-xl p-4 w-80">
+                    <h2 class="text-lg font-semibold mb-2">Edit Task</h2>
+                    <input
+                        type="text"
+                        id="edit-input"
+                        class="border border-gray-400 rounded w-full p-2 mb-3 focus:outline-none"
+                    />
+                    <div class="flex justify-end gap-2">
+                        <button
+                            id="cancel-edit"
+                            class="px-3 py-1 bg-gray-500 text-white rounded hover:bg-gray-400"
+                        >
+                            Cancel
+                        </button>
+                        <button
+                            id="save-edit"
+                            class="px-3 py-1 bg-green-600 text-white rounded hover:bg-green-500"
+                        >
+                            Save
+                        </button>
+                    </div>
+                </div>
+            </div>
             <!-- Taks will appear here -->
             <div id="task-list" class="space-y-2 mt-4"></div>
         </div>
