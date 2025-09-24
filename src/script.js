@@ -1,4 +1,5 @@
 const addTaskBtn = document.getElementById("add-task");
+const clearAllTasksBtn = document.getElementById("clear-all-tasks");
 const taskInput = document.getElementById("todo-task");
 const taskList = document.getElementById("task-list");
 const editModal = document.getElementById("task-edit");
@@ -55,6 +56,19 @@ function renderTasks() {
             tasks.splice(index, 1);
             saveTasks(tasks);
             renderTasks();
+            Toastify({
+                text: "Task deleted!",
+                duration: 2000,
+                gravity: "top",
+                position: "left",
+                stopOnFocus: true,
+                style: {
+                    background: "white",
+                    color: "black",
+                    border: "2px solid green",
+                    borderRadius: "10px",
+                }
+            }).showToast();
         });
 
         // Edit button
@@ -75,6 +89,19 @@ function renderTasks() {
                 editModal.classList.add("hidden");
                 editModal.classList.remove("flex");
                 renderTasks();
+                Toastify({
+                    text: "Task edited!",
+                    duration: 2000,
+                    gravity: "top",
+                    position: "left",
+                    stopOnFocus: true,
+                    style: {
+                        background: "white",
+                        color: "black",
+                        border: "2px solid green",
+                        borderRadius: "10px",
+                    }
+                }).showToast();
             };
 
             cancelEditBtn.onclick = () => {
@@ -104,6 +131,41 @@ addTaskBtn.addEventListener("click", () => {
 
     renderTasks();
     taskInput.value = "";
+    Toastify({
+        text: "New task added!",
+        duration: 2000,
+        gravity: "top",
+        position: "left",
+        stopOnFocus: true,
+        style: {
+            background: "white",
+            color: "black",
+            border: "2px solid green",
+            borderRadius: "10px",
+        }
+    }).showToast();
+});
+
+// === Clear All Tasks ===
+clearAllTasksBtn.addEventListener("click", () => {
+    if (taskList.childElementCount ===  0) {
+        return;
+    }
+    localStorage.clear();
+    taskList.replaceChildren();
+    Toastify({
+        text: "Cleared all tasks!",
+        duration: 2000,
+        gravity: "top",
+        position: "left",
+        stopOnFocus: true,
+        style: {
+            background: "white",
+            color: "black",
+            border: "2px solid green",
+            borderRadius: "10px",
+        }
+    }).showToast();
 });
 
 // === Load on startup ===
