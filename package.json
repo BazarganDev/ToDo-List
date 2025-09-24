@@ -19,6 +19,7 @@
   "homepage": "https://github.com/BazarganDev/ToDo-List#readme",
   "dependencies": {
     "@tailwindcss/cli": "^4.1.13",
-    "tailwindcss": "^4.1.13"
+    "tailwindcss": "^4.1.13",
+    "toastify-js": "^1.12.0"
   }
 }
