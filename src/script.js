@@ -1,4 +1,5 @@
 const addTaskBtn = document.getElementById("add-task");
+const taskPriority = document.getElementById("task-priority");
 const clearAllTasksBtn = document.getElementById("clear-all-tasks");
 const taskInput = document.getElementById("todo-task");
 const taskList = document.getElementById("task-list");
@@ -27,7 +28,13 @@ function renderTasks() {
             "flex justify-between items-center border rounded-xl p-2 bg-gray-100";
 
         const span = document.createElement("span");
-        span.textContent = task.text;
+        const priorityLevel = task.priority;
+        if (priorityLevel === "high") {
+            span.innerHTML = `<img src="../icons/highpriority-icon.svg" alt="high" width="18px" height="18px" class="inline-block" />&ensp;${task.text}`;
+        }
+        if (priorityLevel === "neutral") {
+            span.textContent = task.text;
+        }
         if (task.completed) {
             span.classList.add("line-through", "text-gray-500");
         }
@@ -49,7 +56,8 @@ function renderTasks() {
 
         // Delete button
         const deleteBtn = document.createElement("button");
-        deleteBtn.innerHTML = '<img src="../icons/trash-icon.svg" alt="done" width="18px" height="18px" />';
+        deleteBtn.innerHTML =
+            '<img src="../icons/trash-icon.svg" alt="done" width="18px" height="18px" />';
         deleteBtn.className =
             "px-2 py-1 bg-red-600 text-white rounded hover:bg-red-500";
         deleteBtn.addEventListener("click", () => {
@@ -67,7 +75,7 @@ function renderTasks() {
                     color: "black",
                     border: "2px solid green",
                     borderRadius: "10px",
-                }
+                },
             }).showToast();
         });
 
@@ -100,7 +108,7 @@ function renderTasks() {
                         color: "black",
                         border: "2px solid green",
                         borderRadius: "10px",
-                    }
+                    },
                 }).showToast();
             };
 
@@ -123,10 +131,13 @@ function renderTasks() {
 // === Add Task ===
 addTaskBtn.addEventListener("click", () => {
     const taskText = taskInput.value.trim();
-    if (taskText === "") return;
+    const priorityLevel = taskPriority.value;
+    if (taskText === "") {
+        return;
+    }
 
     const tasks = getTasks();
-    tasks.push({ text: taskText, completed: false });
+    tasks.push({ text: taskText, priority: priorityLevel, completed: false });
     saveTasks(tasks);
 
     renderTasks();
@@ -142,13 +153,13 @@ addTaskBtn.addEventListener("click", () => {
             color: "black",
             border: "2px solid green",
             borderRadius: "10px",
-        }
+        },
     }).showToast();
 });
 
 // === Clear All Tasks ===
 clearAllTasksBtn.addEventListener("click", () => {
-    if (taskList.childElementCount ===  0) {
+    if (taskList.childElementCount === 0) {
         return;
     }
     localStorage.clear();
@@ -164,7 +175,7 @@ clearAllTasksBtn.addEventListener("click", () => {
             color: "black",
             border: "2px solid green",
             borderRadius: "10px",
-        }
+        },
     }).showToast();
 });
 
